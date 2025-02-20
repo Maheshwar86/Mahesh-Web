@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Certifications</title>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/social-media">Social Media</a></li>
+            <li><a href="/achievements">Achievements</a></li>
+            <li><a href="/love-it">I Love It</a></li>
+            <li><a href="/academics">Academics</a></li>
+        </ul>
+    </nav>
+</header>
+<section>
+    <h1>Certifications</h1>
+    <ul>
+        <li th:each="certification : ${details.certifications}">
+            <span th:text="${certification}">Certification Name</span>
+        </li>
+    </ul>
+</section>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>I Love It</title>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/social-media">Social Media</a></li>
+            <li><a href="/achievements">Achievements</a></li>
+            <li><a href="/academics">Academics</a></li>
+        </ul>
+    </nav>
+</header>
+<section>
+    <h1>I Love It</h1>
+    <ul>
+        <li th:each="loveIt : ${details.loveIt}">
+            <span th:text="${loveIt}">Hobby or Interest</span>
+        </li>
+    </ul>
+</section>
+</body>
+</html>

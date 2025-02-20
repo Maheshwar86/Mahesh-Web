@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Achievements</title>
+</head>
+<body>
+<header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/projects">Projects</a></li>
+      <li><a href="/certifications">Certifications</a></li>
+      <li><a href="/social-media">Social Media</a></li>
+      <li><a href="/love-it">I Love It</a></li>
+      <li><a href="/academics">Academics</a></li>
+    </ul>
+  </nav>
+</header>
+<section>
+  <h1>Achievements</h1>
+  <ul>
+    <li th:each="achievement : ${details.achievements}">
+      <span th:text="${achievement}">Achievement Name</span>
+    </li>
+  </ul>
+</section>
+</body>
+</html>

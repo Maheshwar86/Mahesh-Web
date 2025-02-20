@@ -2,10 +2,107 @@
 <html>
 <head>
     <title>Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background: black;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: linear-gradient(45deg, #2575fc, #6a11cb);
+        }
+
+        .container {
+            perspective: 1000px;
+            margin-top: 20px;
+        }
+
+        .card {
+            width: 200px;
+            height: 300px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .card:hover {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            color: white;
+            border-radius: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .card-front {
+            background: #3498db;
+            text-align: center;
+        }
+
+        .card-back {
+            background: #2ecc71;
+            transform: rotateY(180deg);
+            text-align: center;
+        }
+
+        .card-back img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
 <header>
-    <img src="${details.logo}" alt="Logo" />
     <nav>
         <ul>
             <li><a href="/about">About</a></li>
@@ -18,9 +115,17 @@
         </ul>
     </nav>
 </header>
-<section>
-    <h1>Welcome to My Portfolio</h1>
-    <p>${details.about}</p>
-</section>
+<div class="container">
+    <div class="card">
+        <div class="card-front">
+            <h2>Welcome to Maheswar World</h2>
+        </div>
+        <div class="card-back">
+            <img src="https://res.cloudinary.com/duhki4wze/image/upload/v1740026509/h98ukyygaexxafbda0qb.jpg" alt="Maheswar">
+            <p>KURAPARTHI MAHESWAR REDDY</p>
+            <p>MCA (NEW HORIZON COLLEGE)</p>
+        </div>
+    </div>
+</div>
 </body>
 </html>
