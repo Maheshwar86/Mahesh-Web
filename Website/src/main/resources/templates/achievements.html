@@ -2,28 +2,155 @@
 <html>
 <head>
   <title>Achievements</title>
+  <link rel="stylesheet" href="styles.css"> <!-- External CSS file -->
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden; /* Prevent scrolling */
+    }
+
+    #backgroundVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Set it behind the content */
+      object-fit: cover;
+    }
+
+    #logo {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      opacity: 0;
+      width: 150px; /* Small size */
+      height: auto;
+      transition: opacity 1s, top 1s, left 1s, transform 1s, width 1s;
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: flex-start; /* Adjusted navbar to the left */
+      backdrop-filter: blur(10px); /* Blur background */
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      padding: 10px;
+      position: fixed; /* Make navbar fixed */
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      width: 100%; /* Ensure full width */
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap; /* Wrap items if they don't fit */
+      gap: 20px;
+      color: white; /* Change font color to white */
+    }
+
+    nav ul li {
+      display: inline;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: red;
+    }
+
+    nav .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    nav .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      backdrop-filter: blur(10px); /* Blur background */
+      min-width: 160px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 5px;
+      color: white; /* Change font color to white */
+    }
+
+    nav .dropdown-content a {
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+      transition: color 0.3s;
+    }
+
+    nav .dropdown-content a:hover {
+      color: red;
+    }
+
+    nav .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .container {
+      position: relative;
+      top: 60px; /* Space for the navbar */
+      text-align: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto; /* Center the container */
+      color: white; /* Change font color to white */
+    }
+
+    .heading {
+      margin: 20px 0;
+      font-size: 36px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/projects">Projects</a></li>
-      <li><a href="/certifications">Certifications</a></li>
-      <li><a href="/social-media">Social Media</a></li>
-      <li><a href="/love-it">I Love It</a></li>
-      <li><a href="/academics">Academics</a></li>
-    </ul>
-  </nav>
-</header>
-<section>
-  <h1>Achievements</h1>
+<video id="backgroundVideo" loop autoplay muted>
+  <source src="https://res.cloudinary.com/duhki4wze/video/upload/v1740076807/t4gkkboc0blsqnyc9xhc.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<img id="logo" src="https://res.cloudinary.com/duhki4wze/image/upload/v1740047548/j7ustpcoxthwres98ftt.png" alt="Logo">
+
+<nav>
   <ul>
-    <li th:each="achievement : ${details.achievements}">
-      <span th:text="${achievement}">Achievement Name</span>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/projects">Projects</a></li>
+    <li><a href="/certifications">Certifications</a></li>
+    <li><a href="/social-media">Social Media</a></li>
+    <li class="dropdown">
+      <a href="javascript:void(0)">More</a>
+      <div class="dropdown-content">
+        <a href="/love-it">I Love It</a>
+        <a href="/academics">Academics</a>
+      </div>
     </li>
   </ul>
-</section>
+</nav>
+
+<div class="container">
+  <div class="heading">Achievements</div>
+  <div class="content-container">
+    <!-- Your Achievements Page Content Here -->
+  </div>
+</div>
 </body>
 </html>

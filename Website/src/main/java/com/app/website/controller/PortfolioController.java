@@ -14,6 +14,16 @@ public class PortfolioController {
     private PortfolioService portfolioService;
 
     @GetMapping("/")
+    public String index() {
+        return "redirect:/dash";
+    }
+
+    @GetMapping("/dash")
+    public String dash() {
+        return "dash";
+    }
+
+    @GetMapping("/home")
     public String home(Model model) {
         PortfolioDetails details = portfolioService.getPortfolioDetails("your-document-id").orElse(new PortfolioDetails());
         model.addAttribute("details", details);

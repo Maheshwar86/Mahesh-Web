@@ -5,13 +5,16 @@ import com.mongodb.client.MongoClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
+@EnableMongoRepositories(basePackages = "com.app.website.repository")
 public class MongoConfig {
 
     @Bean
     public MongoClient mongoClient() {
-        return MongoClients.create("mongodb+srv://maheswar:%2F%2FJOKER%2F%2F@mahesh.ab1y6.mongodb.net/Mahesh?retryWrites=true&w=majority&appName=Mahesh");
+        String connectionString = "mongodb://localhost:27017";
+        return MongoClients.create(connectionString);
     }
 
     @Bean

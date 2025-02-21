@@ -1,33 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Portfolio</title>
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css"> <!-- External CSS file -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
+        body, html {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            overflow: auto; /* Enable scrolling */
         }
 
-        header {
+        #backgroundVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: black;
-            padding: 10px 0;
+            height: 100%;
+            z-index: -1; /* Set it behind the content */
+            object-fit: cover;
+        }
+
+        #secondaryVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Set it behind the content */
+            object-fit: cover;
+        }
+
+        #logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            opacity: 0;
+            width: 150px; /* Small size */
+            height: auto;
+            transition: opacity 1s, top 1s, left 1s, transform 1s, width 1s;
+            z-index: 1000;
+        }
+
+        #logo.show-large {
+            top: 50%;
+            left: 50%;
+            width: 500px; /* Larger size when it first appears */
+            transform: translate(-50%, -50%);
+            opacity: 1;
+        }
+
+        #logo.move {
+            top: 10px;
+            right: 10px;
+            transform: translate(0, 0);
+            width: 150px; /* Adjust size when moved to top-right corner */
+        }
+
+        nav {
+            display: flex;
+            justify-content: flex-start; /* Adjusted navbar to the left */
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            padding: 10px;
+            position: sticky; /* Make navbar sticky */
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            width: 100%; /* Ensure full width */
+            max-width: 1200px; /* Optional: Limit the navbar width */
         }
 
         nav ul {
-            list-style-type: none;
-            padding: 0;
+            list-style: none;
             margin: 0;
+            padding: 0;
             display: flex;
-            justify-content: center;
-            gap: 10px;
+            flex-wrap: wrap; /* Wrap items if they don't fit */
+            gap: 20px;
         }
 
         nav ul li {
@@ -38,36 +88,130 @@
             text-decoration: none;
             color: white;
             font-weight: bold;
-            padding: 10px 20px;
-            background: linear-gradient(45deg, #6a11cb, #2575fc);
-            border-radius: 5px;
-            transition: background 0.3s;
+            transition: color 0.3s;
         }
 
         nav ul li a:hover {
-            background: linear-gradient(45deg, #2575fc, #6a11cb);
+            color: red;
+        }
+
+        nav .dropdown {
+            position: relative;
+            display: inline-block;
+            backdrop-filter: blur(10px); /* Blur only the More button */
+        }
+
+        nav .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* Blur background */
+            min-width: 160px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+
+        nav .dropdown-content a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: color 0.3s;
+        }
+
+        nav .dropdown-content a:hover {
+            color: red;
+        }
+
+        nav .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .container.hidden {
+            display: none;
         }
 
         .container {
-            perspective: 1000px;
+            position: relative;
+            top: 60px; /* Space for the navbar */
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .heading {
+            margin: 20px 0;
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .content-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-top: 20px;
         }
 
-        .card {
-            width: 200px;
-            height: 300px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
+        .cards-left {
+            display: flex;
+            flex-direction: row; /* Display cards side by side */
+            gap: 20px;
         }
 
-        .card:hover {
+        .card {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* Blur effect */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Semi-transparent border */
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px; /* Card width */
+            color: white;
+            text-align: center;
+        }
+
+        .card h2 {
+            margin-top: 0; /* Remove top margin for the heading */
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .card ul li {
+            margin: 5px 0;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 300px;
+            height: 400px;
+            perspective: 1000px;
+            backdrop-filter: blur(15px); /* Extra blur for the flip card */
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px; /* Add border-radius */
+            overflow: hidden; /* Hide overflow for better appearance */
+        }
+
+        .flip-card:hover .flip-card-inner {
             transform: rotateY(180deg);
         }
 
-        .card-front, .card-back {
+        .flip-card-front, .flip-card-back {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -75,57 +219,145 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 16px;
+            font-size: 18px;
             color: white;
-            border-radius: 10px;
-            padding: 10px;
+            padding: 20px;
             box-sizing: border-box;
-        }
-
-        .card-front {
-            background: #3498db;
             text-align: center;
+            border-radius: 10px; /* Add border-radius */
+            overflow: hidden; /* Hide overflow for better appearance */
         }
 
-        .card-back {
-            background: #2ecc71;
+        .flip-card-front {
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* Extra blur */
+        }
+
+        .flip-card-back {
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* Extra blur */
             transform: rotateY(180deg);
-            text-align: center;
         }
 
-        .card-back img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-bottom: 10px;
+        .flip-card-back p {
+            margin: 0;
         }
+
     </style>
 </head>
 <body>
-<header>
-    <nav>
-        <ul>
-            <li><a href="/about">About</a></li>
-            <li><a href="/projects">Projects</a></li>
-            <li><a href="/certifications">Certifications</a></li>
-            <li><a href="/social-media">Social Media</a></li>
-            <li><a href="/achievements">Achievements</a></li>
-            <li><a href="/love-it">I Love It</a></li>
-            <li><a href="/academics">Academics</a></li>
-        </ul>
-    </nav>
-</header>
-<div class="container">
-    <div class="card">
-        <div class="card-front">
-            <h2>Welcome to Maheswar World</h2>
+<video id="backgroundVideo">
+    <source src="https://res.cloudinary.com/duhki4wze/video/upload/v1740047662/lg4cw1slrwlevdopr6qp.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<video id="secondaryVideo" loop muted style="display: none;">
+    <source src="https://res.cloudinary.com/duhki4wze/video/upload/v1740036740/glvhzxqmcajifogibvvd.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<img id="logo" src="https://res.cloudinary.com/duhki4wze/image/upload/v1740047548/j7ustpcoxthwres98ftt.png" alt="Logo">
+
+<nav>
+    <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/certifications">Certifications</a></li>
+        <li><a href="/social-media">Social Media</a></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)">More</a>
+            <div class="dropdown-content">
+                <a href="/achievements">Achievements</a>
+                <a href="/love-it">I Love It</a>
+                <a href="/academics">Academics</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<div class="container hidden">
+    <div class="heading">Kuraparthi Maheswar Reddy</div>
+    <div class="content-container">
+        <div class="cards-left">
+            <div class="card">
+                <h2>ACADEMICS</h2>
+                <p>Maheswar is studying for an MCA at New Horizon College in Bangalore. He has a strong interest in technology and enjoys learning new things. Maheswar completed MPC in intermediate and BCom in his degree. After starting the MCA program, he has been learning Java, Spring Boot, MongoDB, and MongoDB Atlas.</p>
+            </div>
+            <div class="card">
+                <h2>PROJECTS & PATENTS</h2>
+                <p>Projects:
+                <ul>
+                    <li>Bus Pass Application</li>
+                    <li>LMS</li>
+                    <li>Face Detection Voting System</li>
+                    <li>Fire Detection System</li>
+                    <li>Smart Home</li>
+                </ul>
+                </p>
+                <p>Patents:
+                <ul>
+                    <li>Smart Home</li>
+                    <li>Fruit Checker</li>
+                </ul>
+                </p>
+            </div>
         </div>
-        <div class="card-back">
-            <img src="https://res.cloudinary.com/duhki4wze/image/upload/v1740026509/h98ukyygaexxafbda0qb.jpg" alt="Maheswar">
-            <p>KURAPARTHI MAHESWAR REDDY</p>
-            <p>MCA (NEW HORIZON COLLEGE)</p>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://res.cloudinary.com/duhki4wze/image/upload/v1740053991/cj4q4u7w4fqkhtffg55b.png" alt="Front Image" style="width: 100%; height: auto; border-radius: 10px;">
+                </div>
+                <div class="flip-card-back">
+                    <p>Note: My name is Maheswar Reddy. I am not human. Please be aware of my nature. I'm generally very cool and calm, but if you cross my boundaries, I can be very dangerous. Do not infringe on my freedom.</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const video = document.getElementById('backgroundVideo');
+        const secondaryVideo = document.getElementById('secondaryVideo');
+        const logo = document.getElementById('logo');
+        const container = document.querySelector('.container');
+
+        // Check if user came from dash.html
+        if (sessionStorage.getItem("playVideo") === "true") {
+            sessionStorage.removeItem("playVideo"); // Remove flag so video doesn’t replay
+
+            video.style.display = "block";
+            video.play();
+
+            video.addEventListener('loadedmetadata', () => {
+                const duration = video.duration;
+
+                // Show logo 3 seconds before video ends
+                setTimeout(() => {
+                    logo.classList.add('show-large');
+                }, (duration - 3) * 1000);
+
+                // Move logo to top-right and switch to secondary video
+                setTimeout(() => {
+                    logo.classList.remove('show-large');
+                    logo.classList.add('move');
+                    logo.style.opacity = '1'; // Ensure logo is visible
+                    container.classList.remove('hidden');
+                    video.style.display = 'none';
+                    secondaryVideo.style.display = 'block';
+                    secondaryVideo.play();
+                }, duration * 1000);
+            });
+        } else {
+            // If user comes from any other page, hide the video instantly
+            video.style.display = 'none';
+            secondaryVideo.style.display = 'block';
+            secondaryVideo.play();
+            container.classList.remove('hidden');
+            logo.classList.add('move');
+            logo.style.opacity = '1'; // Ensure logo is visible
+        }
+    });
+</script>
 </body>
 </html>

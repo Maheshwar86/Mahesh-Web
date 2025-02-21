@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dash</title>
+    <link rel="stylesheet" href="styles.css"> <!-- External CSS file -->
+</head>
+<body>
+<h1>Dash Page</h1>
+<button id="diveButton">Dive</button>
+
+<script>
+    document.getElementById('diveButton').addEventListener('click', function() {
+        sessionStorage.setItem("playVideo", "true");
+        window.location.href = "/home";
+    });
+</script>
+</body>
+</html>
